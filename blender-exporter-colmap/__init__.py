@@ -361,7 +361,7 @@ class COLMAP_OT_export(bpy.types.Operator):
         try:
             scene = context.scene
             camera_id = idx + 1
-            filename = f'{cam.name_full}.jpg'
+            filename = f'{cam.name_full}.png'
             
             print(f"[COLMAP Export]   - Extracting camera parameters...")
             # Get actual render dimensions (accounting for resolution scale)
@@ -427,7 +427,8 @@ class COLMAP_OT_export(bpy.types.Operator):
         self.update_progress(context)
         
         # Start render with INVOKE_DEFAULT to keep UI responsive
-        bpy.ops.render.render('INVOKE_DEFAULT', write_still=False)
+        # ~ bpy.ops.render.render('INVOKE_DEFAULT', write_still=False)
+        bpy.ops.render.render(write_still=False)
     
     def save_render_result(self, save_path):
         """Save the render result (called from modal loop, not callback)"""
@@ -464,7 +465,8 @@ class COLMAP_OT_export(bpy.types.Operator):
             old_format = scene.render.image_settings.file_format
             
             scene.render.filepath = str(save_path)
-            scene.render.image_settings.file_format = 'JPEG'
+            scene.render.image_settings.file_format = 'PNG'
+            scene.render.image_settings.color_mode = 'RGBA'
             
             print(f"[COLMAP Export] Calling save_render()...")
             # Save directly from render result
@@ -508,7 +510,7 @@ class COLMAP_OT_export(bpy.types.Operator):
         try:
             # Don't save here - defer to modal loop to avoid threading issues
             cam = self._cameras[self._current_idx]
-            filename = f'{cam.name_full}.jpg'
+            filename = f'{cam.name_full}.png'
             save_path = self._images_dir / filename
             
             print(f"[COLMAP Export] Setting flag to save {filename} in modal loop")
