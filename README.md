@@ -12,13 +12,11 @@ Blender addon which generates a dataset for COLMAP by exporting Blender camera p
 
 ## Installation
 
-1. Download this repository as a ZIP file (or use the pre-built release)
-2. Open Blender
-3. Go to `Edit` > `Preferences` > `Add-ons`
-4. Click `Install...` and select the ZIP file
-5. Enable the addon by checking the box next to "Render: COLMAP Exporter"
+TESTED WITH BLENDER 4.4
 
-The COLMAP Export panel will now appear in the Properties Editor under Output Properties.
+Run `install_to_blender.bat` to install
+
+The COLMAP Export panel will now appear in the Output Tab, supports transparent backgrounds.
 
 ## How to use
 
